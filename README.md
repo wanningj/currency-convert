@@ -14,7 +14,7 @@
 ---
 
 ## 📂 專案結構
-
+````
 /currency-convert
 ├── app/
 │   ├── Models/
@@ -36,6 +36,7 @@
 ├── .env.example         # 環境變數範例
 ├── composer.json        # Laravel 依賴管理
 ├── README.md            # 這個文件
+````
 
 ---
 
@@ -44,12 +45,15 @@
 ### 1️⃣ 即時匯率轉換
 - Endpoint: POST /currency/convert
 - Request example:
+```json
     {
         "from_currency":"USD",
         "to_currency":"TWD",
         "amount":100
     }
+```
 - Response Example:
+```json
     {
         "from_currency": "USD",
         "to_currency": "TWD",
@@ -57,12 +61,14 @@
         "converted_amount": 3150,
         "rate": 31.5
     }
+```
 
 ---
 
 ### 2️⃣ 取得所有匯率
 - Endpoint: GET /currency
 - Response Example:
+```json
     [
         {
             "base_currency": "USD",
@@ -92,18 +98,22 @@
             }
         }
     ]
+```
 
 ---
 
 ### 3️⃣ 新增匯率
 - Endpoint: POST /store
 - Request example:
+```json
     {
         "base_currency":"EUR",
         "convert_currency":"TWD",
         "rate":34.4571
     }
+```
 - Response Example:
+```json
     {
         "base_currency": "EUR",
         "convert_currency": "TWD",
@@ -112,6 +122,7 @@
         "created_at": "2025-02-26T02:53:38.000000Z",
         "id": 10
     }
+```
 
 ---
 
