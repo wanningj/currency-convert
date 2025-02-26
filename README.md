@@ -1,66 +1,122 @@
-<p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400" alt="Laravel Logo"></a></p>
+# 📌 即時匯率轉換API
 
-<p align="center">
-<a href="https://github.com/laravel/framework/actions"><img src="https://github.com/laravel/framework/workflows/tests/badge.svg" alt="Build Status"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/dt/laravel/framework" alt="Total Downloads"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/v/laravel/framework" alt="Latest Stable Version"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
-</p>
+**即時匯率轉換API** 是一個以Laravel架構開發的API，可以查詢不同貨幣之間的匯率，並進行即時轉換。本API使用SQLite作為資料庫。
 
-## About Laravel
+---
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
+## ✨ 功能介紹
 
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
+- ✅ **支援多種貨幣轉換**
+- ✅ **使用模擬匯率**
+- ✅ **支援常見貨幣 : TWD, USD, JPY**
+- ✅ **取得所有貨幣的模擬匯率**
 
-Laravel is accessible, powerful, and provides tools required for large, robust applications.
+---
 
-## Learning Laravel
+## 📂 專案結構
 
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework.
+/currency-convert
+├── app/
+│   ├── Models/
+│   │   ├── Currency.php
+│   ├── Http/
+│   │   ├── Controllers/
+│   │   │   ├── CurrencyController.php
+│   │   ├── Routes/ 
+│   │   │   ├── api.php
+├── database/
+│   ├── database.sqlite  # SQLite資料庫存放位置
+│   ├── migrations/
+│   │   ├── 2025_02_25_105232_currencies_table.php
+│   ├── seeders/         
+│   │   ├── CurrencySeeder.php  # 初始資料填充
+├── tests/       
+│   ├── Feature/
+│   │   ├── CurrencyTest.php    #測試
+├── .env.example         # 環境變數範例
+├── composer.json        # Laravel 依賴管理
+├── README.md            # 這個文件
 
-You may also try the [Laravel Bootcamp](https://bootcamp.laravel.com), where you will be guided through building a modern Laravel application from scratch.
+---
 
-If you don't feel like reading, [Laracasts](https://laracasts.com) can help. Laracasts contains over 2000 video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
+## 📌 API使用方式
 
-## Laravel Sponsors
+### 1️⃣ 即時匯率轉換
+- Endpoint: POST /currency/convert
+- Request example:
+    {
+        "from_currency":"USD",
+        "to_currency":"TWD",
+        "amount":100
+    }
+- Response Example:
+    {
+        "from_currency": "USD",
+        "to_currency": "TWD",
+        "amount": 100,
+        "converted_amount": 3150,
+        "rate": 31.5
+    }
 
-We would like to extend our thanks to the following sponsors for funding Laravel development. If you are interested in becoming a sponsor, please visit the Laravel [Patreon page](https://patreon.com/taylorotwell).
+---
 
-### Premium Partners
+### 2️⃣ 取得所有匯率
+- Endpoint: GET /currency
+- Response Example:
+    [
+        {
+            "base_currency": "USD",
+            "last_updated": "2023-12-25T12:00:00Z",
+            "rates": {
+                "USD": 1,
+                "TWD": 31.5,
+                "JPY": 148.5
+            }
+        },
+        {
+            "base_currency": "TWD",
+            "last_updated": "2023-12-25T12:00:00Z",
+            "rates": {
+                "USD": 0.0317,
+                "TWD": 1,
+                "JPY": 4.7143
+            }
+        },
+        {
+            "base_currency": "JPY",
+            "last_updated": "2023-12-25T12:00:00Z",
+            "rates": {
+                "USD": 0.0067,
+                "TWD": 0.2121,
+                "JPY": 1
+            }
+        }
+    ]
 
-- **[Vehikl](https://vehikl.com/)**
-- **[Tighten Co.](https://tighten.co)**
-- **[Kirschbaum Development Group](https://kirschbaumdevelopment.com)**
-- **[64 Robots](https://64robots.com)**
-- **[Cubet Techno Labs](https://cubettech.com)**
-- **[Cyber-Duck](https://cyber-duck.co.uk)**
-- **[Many](https://www.many.co.uk)**
-- **[Webdock, Fast VPS Hosting](https://www.webdock.io/en)**
-- **[DevSquad](https://devsquad.com)**
-- **[Curotec](https://www.curotec.com/services/technologies/laravel/)**
-- **[OP.GG](https://op.gg)**
-- **[WebReinvent](https://webreinvent.com/?utm_source=laravel&utm_medium=github&utm_campaign=patreon-sponsors)**
-- **[Lendio](https://lendio.com)**
+---
 
-## Contributing
+### 3️⃣ 新增匯率
+- Endpoint: POST /store
+- Request example:
+    {
+        "base_currency":"EUR",
+        "convert_currency":"TWD",
+        "rate":34.4571
+    }
+- Response Example:
+    {
+        "base_currency": "EUR",
+        "convert_currency": "TWD",
+        "rate": 34.4571,
+        "updated_at": "2025-02-26T02:53:38.000000Z",
+        "created_at": "2025-02-26T02:53:38.000000Z",
+        "id": 10
+    }
 
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
+---
 
-## Code of Conduct
+## 📬 聯絡資訊
 
-In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
-
-## Security Vulnerabilities
-
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
-
-## License
-
-The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+- 作者: Wan-Ning
+- Email: sly163369@gmail.com
+- GitHub: wanningj
