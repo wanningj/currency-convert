@@ -17,7 +17,7 @@ class CurrencyContoller extends Controller
         ]);
 
         if ($validator->fails()) {
-            return response()->json($validator->errors(), 422);
+            return response()->json(['errors' => $validator->errors()], 422);
         }
 
         $currency = Currency::create([
@@ -58,7 +58,7 @@ class CurrencyContoller extends Controller
         ]);
 
         if ($validator->fails()) {
-            return response()->json($validator->errors(), 422);
+            return response()->json(['errors' => $validator->errors()], 422);
         }
 
         //查詢匯率

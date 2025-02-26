@@ -9,7 +9,7 @@ use App\Models\Currency;
 
 class CurrencyTest extends TestCase
 {   
-    //測試新增貨幣
+    //測試新增匯率
     public function test_store_currency()
     {
         $response = $this->postJson('/api/store', [
@@ -58,5 +58,42 @@ class CurrencyTest extends TestCase
                 'converted_amount' => 3150,
                 'rate' => 31.5
             ]);
+    }
+
+    //測試轉換未找到匯率
+    public function test_convert_currency_not_found()
+    {
+        $response = $this->postJson('/api/currency/convert', [
+            'from_currency' => 'TWD',
+            'to_currency' => 'EUR',
+            'amount' => 100
+        ]);
+
+        $response->assertStatus(404)
+            ->assertJson(['error' => 'Currency conversion not found.']);
+    }
+
+    //測試新增匯率資料驗證
+    public function test_store_currency_invalid()
+    {
+        $response = $this->postJson('/api/store', [
+            'base_currency' => 'USD',
+            'convert_currency' => 'EUR',
+        ]);
+
+        $response->assertStatus(422)
+            ->assertJsonValidationErrors(['rate']);
+    }
+
+    //測試匯率轉換資料驗證
+    public function test_convert_currency_invalid()
+    {
+        $response = $this->postJson('/api/currency/convert', [
+            'from_currency' => 'TWD',
+            'amount' => 100
+        ]);
+
+        $response->assertStatus(422)
+            ->assertJsonValidationErrors(['to_currency']);
     }
 }
