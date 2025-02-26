@@ -64,7 +64,7 @@
     [
         {
             "base_currency": "USD",
-            "last_updated": "2023-12-25T12:00:00Z",
+            "last_updated": "2025-02-26T02:56:32.000000Z",
             "rates": {
                 "USD": 1,
                 "TWD": 31.5,
@@ -73,7 +73,7 @@
         },
         {
             "base_currency": "TWD",
-            "last_updated": "2023-12-25T12:00:00Z",
+            "last_updated": "2025-02-26T02:56:32.000000Z",
             "rates": {
                 "USD": 0.0317,
                 "TWD": 1,
@@ -82,9 +82,9 @@
         },
         {
             "base_currency": "JPY",
-            "last_updated": "2023-12-25T12:00:00Z",
+            "last_updated": "2025-02-26T02:56:32.000000Z",
             "rates": {
-                "USD": 0.0067,
+                "USD": 0.00673,
                 "TWD": 0.2121,
                 "JPY": 1
             }
