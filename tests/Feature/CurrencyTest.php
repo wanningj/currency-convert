@@ -6,9 +6,19 @@ use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Foundation\Testing\WithFaker;
 use Tests\TestCase;
 use App\Models\Currency;
+use Database\Seeders\CurrencySeeder;
 
 class CurrencyTest extends TestCase
-{   
+{
+
+    use RefreshDatabase;
+
+    protected function setUp(): void
+    {
+        parent::setUp();
+        $this->seed(CurrencySeeder::class);
+    }
+
     //測試新增匯率
     public function test_store_currency()
     {
