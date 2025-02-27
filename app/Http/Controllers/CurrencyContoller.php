@@ -78,7 +78,7 @@ class CurrencyContoller extends Controller
             'from_currency' => $request->from_currency,
             'to_currency' => $request->to_currency,
             'amount' => (int) $request->amount,
-            'converted_amount' => $convert_amount,
+            'converted_amount' => round($convert_amount, 2),
             'rate' => round($rate, 5)
         ];
 

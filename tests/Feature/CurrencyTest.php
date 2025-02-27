@@ -10,7 +10,6 @@ use Database\Seeders\CurrencySeeder;
 
 class CurrencyTest extends TestCase
 {
-
     use RefreshDatabase;
 
     protected function setUp(): void
