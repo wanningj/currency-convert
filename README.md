@@ -18,8 +18,8 @@
 │   ├── Http/
 │   │   ├── Controllers/
 │   │   │   ├── CurrencyController.php
-│   │   ├── Routes/ 
-│   │   │   ├── api.php
+├── routes/ 
+│   ├── api.php
 ├── database/
 │   ├── database.sqlite  # SQLite資料庫存放位置
 │   ├── migrations/
